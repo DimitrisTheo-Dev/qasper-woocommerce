@@ -24,7 +24,10 @@ final class Qasper_WooCommerce_Rest_Controller
         });
     }
 
-    public function add_to_cart(WP_REST_Request $request): WP_REST_Response|WP_Error
+    /**
+     * @return WP_REST_Response|WP_Error
+     */
+    public function add_to_cart(WP_REST_Request $request)
     {
         if (!function_exists('WC') || WC()->cart === null) {
             return new WP_Error('qasper_woocommerce_cart_unavailable', 'WooCommerce cart is unavailable.', ['status' => 503]);
@@ -71,13 +74,16 @@ final class Qasper_WooCommerce_Rest_Controller
         ]);
     }
 
-    private function is_valid_bridge_nonce(mixed $nonce): bool
+    private function is_valid_bridge_nonce($nonce): bool
     {
         return is_string($nonce)
             && wp_verify_nonce($nonce, 'qasper_woocommerce_cart_bridge_' . $this->settings->store_connection_id()) !== false;
     }
 
-    private function introspect_intent(array $payload): array|WP_Error
+    /**
+     * @return array|WP_Error
+     */
+    private function introspect_intent(array $payload)
     {
         $intent_token = isset($payload['intentToken']) ? sanitize_text_field((string) $payload['intentToken']) : '';
         if ($intent_token === '') {
