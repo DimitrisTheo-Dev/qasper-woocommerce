@@ -120,7 +120,12 @@ final class Qasper_WooCommerce_Settings
             return 'https://qasper.ai';
         }
 
-        return $parts['scheme'] . '://' . $parts['host'];
+        $origin = $parts['scheme'] . '://' . $parts['host'];
+        if (isset($parts['port'])) {
+            $origin .= ':' . (int) $parts['port'];
+        }
+
+        return $origin;
     }
 
     public function widget_script_url(): string
@@ -158,6 +163,20 @@ final class Qasper_WooCommerce_Settings
             return 'https://qasper.ai';
         }
 
-        return in_array($parts['scheme'], ['https', 'http'], true) ? $value : 'https://qasper.ai';
+        if ($parts['scheme'] === 'https') {
+            return $value;
+        }
+
+        if ($parts['scheme'] === 'http' && $this->is_local_development_host($parts['host'])) {
+            return $value;
+        }
+
+        return 'https://qasper.ai';
+    }
+
+    private function is_local_development_host(string $host): bool
+    {
+        $host = strtolower(trim($host, '[]'));
+        return in_array($host, ['localhost', '127.0.0.1', '::1'], true);
     }
 }

@@ -16,7 +16,7 @@ Open WooCommerce > Qasper and configure:
 
 - Business slug
 - Store connection ID from the Qasper WooCommerce connection
-- Qasper base URL
+- Qasper base URL. HTTPS is required except for localhost development URLs.
 - Enable assistant
 
 ## License
