@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Declare WooCommerce HPOS and Cart/Checkout Blocks compatibility for Marketplace review.
+
 ## 0.1.2
 
 - Add WordPress/Woo submission metadata and external-service disclosure.

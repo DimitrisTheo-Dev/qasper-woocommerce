@@ -33,9 +33,14 @@ Expected security behavior:
 - Cart actions require a valid WordPress REST nonce, Qasper cart bridge nonce, and Qasper-validated intent token.
 - Product URLs sent in page context do not include query strings or fragments.
 
+Compatibility notes:
+
+- The plugin declares HPOS compatibility and does not read or write WooCommerce order storage.
+- The plugin declares Cart/Checkout Blocks compatibility and uses WooCommerce cart APIs rather than classic-cart or classic-checkout template hooks.
+
 ## Submission Checklist
 
-- Upload ZIP: `qasper-woocommerce-0.1.2.zip`
+- Upload ZIP: `qasper-woocommerce-0.1.3.zip`
 - Product upload: plugin ZIP.
 - Business details: explain first-party Qasper SaaS integration and chosen Woo monetization path.
 - Testing instructions: use the steps above.

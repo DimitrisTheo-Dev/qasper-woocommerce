@@ -3,7 +3,7 @@
  * Plugin Name:       Qasper WooCommerce
  * Plugin URI:        https://qasper.ai/woocommerce
  * Description:       Embed the Qasper storefront assistant in WooCommerce and securely bridge cart actions.
- * Version:           0.1.2
+ * Version:           0.1.3
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            Qasper
@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-define('QASPER_WOOCOMMERCE_VERSION', '0.1.2');
+define('QASPER_WOOCOMMERCE_VERSION', '0.1.3');
 define('QASPER_WOOCOMMERCE_FILE', __FILE__);
 define('QASPER_WOOCOMMERCE_DIR', plugin_dir_path(__FILE__));
 define('QASPER_WOOCOMMERCE_URL', plugin_dir_url(__FILE__));
@@ -30,6 +30,15 @@ require_once QASPER_WOOCOMMERCE_DIR . 'includes/class-qasper-woocommerce-page-co
 require_once QASPER_WOOCOMMERCE_DIR . 'includes/class-qasper-woocommerce-snippet-builder.php';
 require_once QASPER_WOOCOMMERCE_DIR . 'includes/class-qasper-woocommerce-rest-controller.php';
 require_once QASPER_WOOCOMMERCE_DIR . 'includes/class-qasper-woocommerce-plugin.php';
+
+add_action('before_woocommerce_init', static function (): void {
+    if (!class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+        return;
+    }
+
+    \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('cart_checkout_blocks', __FILE__, true);
+});
 
 add_action('plugins_loaded', static function (): void {
     if (!class_exists('WooCommerce')) {

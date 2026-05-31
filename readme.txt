@@ -4,7 +4,7 @@ Tags:              woocommerce, ecommerce, ai, chat, cart
 Requires at least: 6.4
 Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        0.1.2
+Stable tag:        0.1.3
 License:           GPLv3 or later
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -75,6 +75,9 @@ Only for localhost or loopback development. Production Qasper URLs must use HTTP
 No. Product page context strips query strings and fragments before the URL is sent.
 
 == Changelog ==
+
+= 0.1.3 =
+* Declare WooCommerce HPOS and Cart/Checkout Blocks compatibility for Marketplace review.
 
 = 0.1.2 =
 * Woo Marketplace submission package: PHP 7.4-compatible syntax, WordPress.org-format readme metadata, external-service disclosure, and release metadata alignment.
